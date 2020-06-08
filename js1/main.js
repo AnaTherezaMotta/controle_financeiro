@@ -5,7 +5,8 @@ function cadUsuario(){
     const cep = document.getElementById("cep").value;
     const telefone = document.getElementById("telefone").value;
     const email = document.getElementById("email").value;
-    const status = document.getElementById("status").value;
+    const status = ativo;
+    // const status = document.getElementById("status").value;
     const senha = document.getElementById("senha").value;
 
     // let id = usuarios.length
@@ -105,7 +106,7 @@ function logar(){
                   toast.addEventListener('mouseenter', Swal.stopTimer)
                   toast.addEventListener('mouseleave', Swal.resumeTimer)
                 //   href="DesafioObjetos/paper-dashboard-master/examples/dashboard"
-                
+                href="usuario.html"
                 }
               })
               
