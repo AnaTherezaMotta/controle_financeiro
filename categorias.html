@@ -11,10 +11,10 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  
+  <script src="js1/main.js"></script><!--nosso javascript-->
   <script src="js/menu.js"></script>
 
-  <title>Menu</title>
+  <title>Cadastro de categorias</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-sm bg-info navbar-dark">
@@ -41,42 +41,37 @@
   </ul>
        
       </nav>
-  
+  <div class="row">
 <div class="col-12" style="text-align: center;"><h1 id = "user"></h1></div>
 
-   
-    
-     
       
     </div>
     
-        
-      <div class="col-md-4 col-xs-4">
-        <h2>Entradas e saídas</h2>
+    <div class="col-md-4 col-xs-4">
+        <h2>Cadastro de Categorias</h2>
 
-        <div class="form-group">
-            <label for="">Entradas</label>
-            <input type="text" class="form-control" id="entrada">
+        <div class="form-group" hidden>
+            <label for="">ID</label>
+            <input type="text" class="form-control" id="id">
         </div>
-        <button class="btn btn-outline-success" type="button" onclick="cadCategoria()">Registrar Entreda</button>
         <div class="form-group">
-          <label for="">Saídas</label>
-          <input type="text" class="form-control" id="saida">
-      </div>
-      <button class="btn btn-outline-success" type="button" onclick="cadCategoria()">Registrar Saída</button>
-    
-      </div>
-      <div class="col-md-8 col-xs-8">
-        <h2>Lista de Entradas e Saídas</h2>
+            <label for="">Nome</label>
+            <input type="text" class="form-control" id="nome">
+        </div>
+
+        <button class="btn btn-outline-success" type="button" onclick="cadCategoria()">Salvar</button>
+        <button class="btn btn-outline-info" type="button" onclick="alterarUser()">Alterar</button>
+    </div>
+    <div class="col-md-8 col-xs-8">
+        <h2>Lista de Categorias</h2>
         <table class="table">
             <thead>
                 <tr>
-                    <th>Entradas</th>
-                    <th>Saídas</th>
+                    <th>ID</th>
+                    <th>Nome</th>
                     <th></th>
                 </tr>
             </thead>
-            
             <tbody id="tbody">
             
             </tbody>

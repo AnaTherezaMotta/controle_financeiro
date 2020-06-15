@@ -1,5 +1,6 @@
 const usuarios = [];
-const produtos = [];
+// const produtos = [];
+// const categorias = [];
 function cadUsuario(){
     const nome = document.getElementById("nome").value;
     const cep = document.getElementById("cep").value;
@@ -122,123 +123,11 @@ function logar(){
 
 }
 
-function nome(){
-    let usuariosGravados = JSON.parse(window.localStorage.getItem("usuarios"));
-
-    const email = document.getElementById("email").value;
-    const nome = document.getElementById("nome").value;
-    let usuarioIndex = usuariosGravados.findIndex(usuario => usuario.email == email);
-
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        onOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-      })
-      
-      Toast.fire({
-        icon: 'success',
-        title: `Bem vindo, ${usuariosGravados[usuarioIndex].nome}!`,
-      });
-    
-}
-
-function cadProduto(){
-    const nome = document.getElementById("nome").value;
-    const descricao = document.getElementById("descricao").value;
-    const quantidade = document.getElementById("quantidade").value;
-    const preco = document.getElementById("preco").value;
-
-    // let id = usuarios.length
-    const produto = {id: Date.now(),nome, descricao, quantidade, preco};
-    // usuarios.push(usuario);
-    // // console.log(usuarios)
-    // window.localStorage.setItem("usuarios",JSON.stringify(usuarios));
-    let produtoGravado = JSON.parse(window.localStorage.getItem("produtos"));
-    if(produtoGravado == null){
-        window.localStorage.setItem('produtos',JSON.stringify([]));
-        produtoGravado = JSON.parse(window.localStorage.getItem("produtos"));
-        produtoGravado.push(produto);
-        window.localStorage.setItem('produtos', JSON.stringify(produtoGravado));
-
-        let produtoIndex = produtoGravado.findIndex(produto => produto.nome == nome);
-        if(produtoIndex != -1){
-            // Swal.fire({
-            //     icon: 'warning',
-            //     title: 'Email já está cadastrado no sistema!',
-            //     showConfirmButton: false,
-            //     timer: 1500
-            // });
-        }else{
-            produtoGravado.push(produto);
-        window.localStorage.setItem('produtos', JSON.stringify(produtoGravado));
-        }
-        
-
-    }else{ // chave usuario ja existente na memoria
-        produtoGravado.push(produto);
-        window.localStorage.setItem('produtos', JSON.stringify(produtoGravado));
-        let produtoIndex = produtoGravado.findIndex(produto => produto.nome == nome);
-        if(produtoIndex != -1){
-            // Swal.fire({
-            //     icon: 'warning',
-            //     title: 'Email já está cadastrado no sistema!',
-            //     showConfirmButton: false,
-            //     timer: 1500
-            // });
-
-        
-        }else{
-            produtoGravado.push(produto);
-            window.localStorage.setItem('produtos', JSON.stringify(produtoGravado));
-        }
-        
-        
-    }
-    
-    Swal.fire({
-        icon: 'success',
-        title: 'Produto cadastrado com sucesso!!!',
-        showConfirmButton: false,
-        timer: 1500
-    });
-      
-    limpar();
-    listarProdutos();
-
-}
 
 function apagarHistorico(){
     window.localStorage.removeItem("produtos");
 }
 
-function listarProdutos(){
-    let linha = "";
-    let produtosGravado = JSON.parse(window.localStorage.getItem("produtos"));
-    if(produtosGravado){
-        produtosGravado.forEach(produto => {
-            row = document.getElementById("tbody");
-            if(row != null){
-                linha += "<tr>"+
-                    "<td id='tdid'>"+produto.id+"</td>"+
-                    "<td id='tdnome'>"+produto.nome+"</td>"+
-                    "<td id='tddescricao'>"+produto.descricao+"</td>"+
-                    "<td id='tdquantidade'>"+produto.quantidade+"</td>"+
-                    "<td id='tdpreco'>"+produto.preco+"</td>"+
-                    "<td id='tdacoes'><button class='btn btn-outline-success' onclick='editarproduto("+produto.id+")'><i class='fa fa-edit'></i></button>"+
-                    "<button class='btn btn-outline-danger'onclick='apagarproduto("+produto.id+")'><i class='fa fa-trash'></i></button>"
-                    +"</tr>";
-                row.innerHTML = linha;
-            }
-            
-        });
-    }
-}
 function listarUser(){
     let linha = "";
     let usuariosGravado = JSON.parse(window.localStorage.getItem("usuarios"));
@@ -263,6 +152,9 @@ function listarUser(){
         });
     }
 }
+
+
+
 
 function apagarproduto(id){
     Swal.fire({
@@ -537,26 +429,83 @@ function alterarUsuario(){
 
 
 }
+function cadCategoria(){
+    const nome = document.getElementById("nome").value;
 
-// function cadUsuario(){
-//     const nome = document.getElementById("nome").value;
-//     const endereco = document.getElementById("endereco").value;
-//     const telefone = document.getElementById("telefone").value;
-//     const email = document.getElementById("email").value;
-//     const cidade = document.getElementById("cidade").value;
-//     const senha = document.getElementById("senha").value;
-//     let id = usuarios.length;
-//     const usuario = {id: id++,nome, endereco,telefone, email, cidade, senha};
-//     usuarios.push(usuario);
-//     window.localStorage.setItem("usuarios",JSON.stringify(usuarios));
+    const categoria = {id: Date.now(),nome};
+  
+    let categoriaGravado = JSON.parse(window.localStorage.getItem("categorias"));
+    if(categoriaGravado == null){
+        window.localStorage.setItem('categorias',JSON.stringify([]));
+        categoriaGravado = JSON.parse(window.localStorage.getItem("categorias"));
+        categoriaGravado.push(categoria);
+        window.localStorage.setItem('categorias', JSON.stringify(categoriaGravado));
 
-//     Swal.fire({
-//         icon: 'success',
-//         title: 'Usuário cadastrado com sucesso!!!',
-//         showConfirmButton: false,
-//         timer: 1500
-//     });
+        let categoriaIndex = categoriaGravado.findIndex(categorias => categoria.nome == nome);
+         if(categoriaIndex !== -1){
+            Swal.fire({
+                icon: 'warning',
+                title: 'Nome já está cadastrado no sistema!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }else{
+            categoriaGravado.push(categoria);
+        window.localStorage.setItem('categorias', JSON.stringify(categoriaGravado));
+        }
+        
 
-//     limpar();
+     }else{ // chave usuario ja existente na memoria
+         categoriaGravado.push(categoria);
+      window.localStorage.setItem('categoria', JSON.stringify(categoriaGravado));
+    //     let categoriaIndex = categoriaGravado.findIndex(categoria => categoria);
+        // if(categoriaIndex !== -1){
+        //     Swal.fire({
+        //         icon: 'warning',
+        //         title: 'Email já está cadastrado no sistema!',
+        //         showConfirmButton: false,
+        //         timer: 1500
+        //     });
+
+        
+        // }else{
+        //     categoriaGravado.push(categoria);
+        //     window.localStorage.setItem('categorias', JSON.stringify(categoriaGravado));
+        // }
+        
+        
+    }
     
-// }
+    Swal.fire({
+        icon: 'success',
+        title: 'Catregoria cadastrado com sucesso!!!',
+        showConfirmButton: false,
+        timer: 1500
+    });
+      
+    limpar();
+    listarCategoria();
+    
+
+}
+function listarCategoria(){
+    let linha = "";
+    let categoriasGravado = JSON.parse(window.localStorage.getItem("categorias"));
+    if(categoriasGravado){
+        categoriasGravado.forEach(categoria => {
+            row = document.getElementById("tbody");
+            if(row != null){
+                linha += "<tr>"+
+                    "<td id='tdid'>"+categoria.id+"</td>"+
+                    "<td id='tdnome'>"+categoria.nome+"</td>"+
+                    
+                    "<td id='tdacoes'><button class='btn btn-outline-success' onclick='editarcategoria("+categoria.id+")'><i class='fa fa-edit'>editar</i></button>"+
+                    "<button class='btn btn-outline-danger'onclick='apagarcategoria("+categoria.id+")'>apagar<i class='fa fa-trash'></i></button>"
+                    +"</tr>";
+                row.innerHTML = linha;
+            }
+            
+        });
+    }
+}
+
